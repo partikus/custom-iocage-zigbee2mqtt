@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# PROVIDE: zigbee2mqtt
+# REQUIRE: DAEMON NETWORKING
+# BEFORE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="zigbee2mqtt"
+rcvar=zigbee2mqtt_enable
+
+: ${zigbee2mqtt_enable:="NO"}
+
+# daemon
+pidfile="/var/run/${name}.pid"
+node="/usr/local/bin/node"
+script_js="/usr/local/opt/zigbee2mqtt/index.js"
+command=/usr/sbin/daemon
+procname="daemon"
+command_args=" -c -f -P ${pidfile} ${node} ${script_js}"
+
+load_rc_config $name
+run_rc_command "$1"

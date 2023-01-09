@@ -1,13 +1,10 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          Mosquitto - FreeNAS Community Plugin
+                       zigbee2mqtt
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- edit mosquitto config file:
-    ee /usr/local/etc/mosquitto/mosquitto.conf
+- edit zigbee2mqtt config file:
+    nano /usr/local/opt/zigbee2mqtt/data/configuration.yaml
 
-- control mosquitto service:
-    service mosquitto [reload|restart|start|status|stop]
+- control zigbee2mqtt service:
+    service zigbee2mqtt [reload|restart|start|status|stop]
 
-- testing subscribe or publish:
-    mosquitto_sub -d -t /dev/test
-    mosquitto_pub -d -t /dev/test -m "Hello World"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

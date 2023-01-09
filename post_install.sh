@@ -1,22 +1,11 @@
 #!/bin/sh
 
-CONFIG="/usr/local/etc/mosquitto/mosquitto.conf"
+git clone --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /usr/local/opt/zigbee2mqtt
 
-# Provide a minimal configuration for mosquitto
-cp ${CONFIG}.plugin ${CONFIG}
+cd /usr/local/opt/zigbee2mqtt
 
-DBPATH="$(grep ^persistence_location ${CONFIG} | awk '{print($2)}')"
-PWFILE="$(grep ^password_file ${CONFIG} | awk '{print($2)}')"
-USER="$(grep ^user ${CONFIG} | awk '{print($2)}')"
+npm ci
 
-# Create a non-root user to run the broker
-pw adduser -u 1883 -n "${USER}" -w no -d /nonexistent
+sysrc zigbee2mqtt_enable="YES"
+service zigbee2mqtt start || exit 1
 
-# Install a directory for the mosquitto.db
-install -d -g "${USER}" -m 755 -o "${USER}" -- "${DBPATH}"
-
-# Install an empty password file
-install -m 644 -- /dev/null "${PWFILE}"
-
-sysrc mosquitto_enable="YES"
-service mosquitto start || exit 1

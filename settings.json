@@ -1,77 +1,28 @@
 {
-	"servicerestart":"service mosquitto restart",
-	"serviceget": "/usr/local/bin/mosquittoget",
-	"serviceset": "/usr/local/bin/mosquittoset",
+	"servicerestart":"service zigbee2mqtt restart",
 	"options":
 	{
-		"port": {
-			"type": "int",
-			"name": "MQTT Listener - Port",
-			"description": "Port for MQTT connections",
-			"range": "1024-32000",
-			"default": "1883",
-			"requirerestart": true
-		},
-		"allow_anonymous": {
-			"type": "bool",
-			"name": "Allow anonymous setting",
-			"description": "Allow anonymous MQTT connections",
-			"default": true,
-			"requirerestart": true
-		},
-		"adduser": {
-			"type": "add",
-			"name": "Add User",
-			"description": "Add new MQTT user",
-			"requiredargs": {
-				"username": {
-					"type": "string",
-					"description": "MQTT Client Username"
-				},
-				"password": {
-					"type": "password",
-					"description": "MQTT Client Password"
-				}
-			},
-			"requirerestart": true
-		},
-		"setpassword": {
-			"name": "Set user password",
+		"mqtt": {
+			"name": "Set MQTT credentials",
 			"description": "Set or change an MQTT user password",
 			"requiredargs": {
+				"host": {
+					"type": "string",
+					"description": "MQTT Client host"
+				},
+				"port": {
+					"type": "string",
+					"description": "MQTT Client port"
+				},
 				"username": {
 					"type": "string",
-					"description": "MQTT Client Username"
+					"description": "MQTT Client username"
 				},
 				"password": {
 					"type": "password",
-					"description": "MQTT Client Password"
+					"description": "MQTT Client password"
 				}
 			},
-			"requirerestart": true
-		},
-		"deluser": {
-			"type": "delete",
-			"name": "Delete User",
-			"description": "Remove a MQTT user",
-			"requirerestart": true
-		},
-		"addtls":{
-			"type": "add",
-			"name": "Add tls listening",
-			"description": "Generate certs and keys for a self signed encrypted tls listening",
-			"requiredargs": {
-				"hostname": {
-					"type": "string",
-					"description": "hostname specified by -h flag on mosquitto_pub/sub"
-				}
-			},
-			"requirerestart": true
-		},
-		"deltls":{
-			"type": "delete",
-			"name": "Remove tls listening",
-			"description": "Delete certs and keys for a self signed encrypted tls listening",
 			"requirerestart": true
 		}
 	}
